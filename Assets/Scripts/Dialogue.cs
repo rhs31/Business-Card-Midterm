@@ -10,5 +10,5 @@ public class Dialogue : MonoBehaviour
     [TextArea(3, 10)]
     public string[] sentences;
     public GameObject[] objectArray;
-    public bool[] lookAtObject;
+    public GameObject[] whatToLookAt;
 }

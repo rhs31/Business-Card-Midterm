@@ -23,7 +23,7 @@ public class DialogueManager : MonoBehaviour
     public int dialogueIndex;
     [SerializeField]private float timeElapsed;
     Queue<GameObject> gameObjectsToShow;
-    Queue<bool> lookAtQueue;
+    Queue<GameObject> lookAtQueue;
     public GameObject emptyObj;
     
 
@@ -34,7 +34,7 @@ public class DialogueManager : MonoBehaviour
         timeline.Pause();
         sentences = new Queue<string>();
         gameObjectsToShow = new Queue<GameObject>();
-        lookAtQueue = new Queue<bool>();
+        lookAtQueue = new Queue<GameObject>();
         buttons = FindObjectsOfType<ButtonScript>();
 
         Head = GameObject.FindGameObjectWithTag("Head");
@@ -71,9 +71,9 @@ public class DialogueManager : MonoBehaviour
             print(go);
             gameObjectsToShow.Enqueue(go);
         }
-       foreach(bool lookBool in dialogue.lookAtObject)
+       foreach(GameObject lookAtObject in dialogue.whatToLookAt)
         {
-            lookAtQueue.Enqueue(lookBool);
+            lookAtQueue.Enqueue(lookAtObject);
         }
         timeStarted = Time.time;
         DisplayNextSentence();
@@ -94,10 +94,13 @@ public class DialogueManager : MonoBehaviour
         string sentence = sentences.Dequeue();
         GameObject obj = gameObjectsToShow.Dequeue();
         obj.SetActive(true);
-        bool lookAtBool = lookAtQueue.Dequeue();
-        if(lookAtBool)
+        if (obj.tag != "EmptyObject")
         {
             Head.GetComponent<HeadScript>().SlowlyLookAt(obj.transform);
+        }
+        else
+        {
+            Head.GetComponent<HeadScript>().SlowlyLookAt(GameObject.FindGameObjectWithTag("MainCamera").transform);
         }
 
         StopAllCoroutines();
@@ -117,11 +120,17 @@ public class DialogueManager : MonoBehaviour
 
     void EndDialogue()
     {
+        
         timeElapsed = 0;
         DialogueAnimator.SetBool("isOpen", false);
         foreach (var button in buttons)
         {
             button.gameObject.SetActive(true);
+        }
+        GameObject[] dialogueItems = GameObject.FindGameObjectsWithTag("DialogueItem");
+        foreach(GameObject item in dialogueItems)
+        {
+            item.SetActive(false);
         }
         DialogueBox.SetActive(false);
         
