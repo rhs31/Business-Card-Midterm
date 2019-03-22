@@ -14,6 +14,7 @@ public class DialogueManager : MonoBehaviour
     ButtonScript[] buttons;
     public GameObject DialogueBox;
     private PlayableDirector timeline;
+
     
     // Start is called before the first frame update
     void Start()
@@ -22,9 +23,10 @@ public class DialogueManager : MonoBehaviour
         buttons = FindObjectsOfType<ButtonScript>();
     }
 
-    public void StartDialogue(Dialogue dialogue, PlayableDirector tl)
+    public void StartDialogue(Dialogue dialogue)
     {
-        timeline = tl;
+        //timeline = tl;
+        timeline = gameObject.GetComponent<PlayableDirector>();
         ButtonsAnimator.SetBool("isOpen", false);
         DialogueAnimator.SetBool("isOpen", true);
         NameText.text = dialogue.name;
