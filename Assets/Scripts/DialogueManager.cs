@@ -23,7 +23,7 @@ public class DialogueManager : MonoBehaviour
     public int dialogueIndex;
     [SerializeField]private float timeElapsed;
     Queue<GameObject> gameObjectsToShow;
-
+    Queue<bool> lookAtQueue;
     public GameObject emptyObj;
     
 
@@ -34,6 +34,7 @@ public class DialogueManager : MonoBehaviour
         timeline.Pause();
         sentences = new Queue<string>();
         gameObjectsToShow = new Queue<GameObject>();
+        lookAtQueue = new Queue<bool>();
         buttons = FindObjectsOfType<ButtonScript>();
 
         Head = GameObject.FindGameObjectWithTag("Head");
@@ -70,6 +71,10 @@ public class DialogueManager : MonoBehaviour
             print(go);
             gameObjectsToShow.Enqueue(go);
         }
+       foreach(bool lookBool in dialogue.lookAtObject)
+        {
+            lookAtQueue.Enqueue(lookBool);
+        }
         timeStarted = Time.time;
         DisplayNextSentence();
     }
@@ -89,6 +94,11 @@ public class DialogueManager : MonoBehaviour
         string sentence = sentences.Dequeue();
         GameObject obj = gameObjectsToShow.Dequeue();
         obj.SetActive(true);
+        bool lookAtBool = lookAtQueue.Dequeue();
+        if(lookAtBool)
+        {
+            Head.GetComponent<HeadScript>().SlowlyLookAt(obj.transform);
+        }
 
         StopAllCoroutines();
         StartCoroutine(TypeSentence(sentence));
