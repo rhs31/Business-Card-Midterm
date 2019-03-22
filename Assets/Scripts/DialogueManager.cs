@@ -12,6 +12,7 @@ public class DialogueManager : MonoBehaviour
     public Animator ButtonsAnimator;
     Queue<string> sentences;
     ButtonScript[] buttons;
+    public GameObject DialogueBox;
     private PlayableDirector timeline;
     
     // Start is called before the first frame update
@@ -69,6 +70,7 @@ public class DialogueManager : MonoBehaviour
         {
             button.gameObject.SetActive(true);
         }
+        DialogueBox.SetActive(false);
         
         ButtonsAnimator.SetBool("isOpen", true);
     }

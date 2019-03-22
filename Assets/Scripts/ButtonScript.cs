@@ -10,9 +10,9 @@ public class ButtonScript : MonoBehaviour
     private bool clicked;
     private float speed = 1.0f;
     public GameObject DummyObject;
-    private Transform dummyTransform;
     //public bool isAbout = false;
     public GameObject GameObjectToSetActive;
+    private Transform cameraTransform;
     
     // Start is called before the first frame update
     void Start()
@@ -32,13 +32,10 @@ public class ButtonScript : MonoBehaviour
         }
         GameObjectToSetActive.SetActive(true);
 
-        if(dummyTransform!=null)
-            Destroy(dummyTransform.parent);
-        //Vector3 buttonPos = new Vector3(rectTransform.localPosition.x, rectTransform.localPosition.y, -1000);
+        
         GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
-        Vector3 cameraPos = new Vector3(camera.transform.position.x, camera.transform.position.y, camera.transform.position.z);
-        dummyTransform = Instantiate(DummyObject, cameraPos, Quaternion.identity).transform;
-        Head.SlowlyLookAt(dummyTransform);
+        cameraTransform = camera.transform;
+        Head.SlowlyLookAt(cameraTransform);
     }
     
 }
