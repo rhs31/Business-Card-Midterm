@@ -6,6 +6,8 @@ using UnityEngine.UI;
 using UnityEngine.Playables;
 public class DialogueManager : MonoBehaviour
 {
+    //FIX DIALOGUE STEPPING!!!!!!!!!!!!!!!!!
+
     public Text NameText;
     public Text DialogueText;
     public Animator DialogueAnimator;
@@ -15,20 +17,36 @@ public class DialogueManager : MonoBehaviour
     public GameObject DialogueBox;
     private PlayableDirector timeline;
     private float timeStarted;
+    private float stepTime = 3;
+    bool dialogueStarted;
+    public GameObject Head;
+    public int dialogueIndex;
     [SerializeField]private float timeElapsed;
+    Queue<GameObject> gameObjectsToShow;
+
+    public GameObject emptyObj;
     
+
     // Start is called before the first frame update
     void Start()
     {
         timeline = gameObject.GetComponent<PlayableDirector>();
         timeline.Pause();
         sentences = new Queue<string>();
+        gameObjectsToShow = new Queue<GameObject>();
         buttons = FindObjectsOfType<ButtonScript>();
+
+        Head = GameObject.FindGameObjectWithTag("Head");
+        
     }
     private void Update()
     {
-        timeElapsed = Time.time - timeStarted;
-        if (timeElapsed > 3)
+        if(dialogueStarted)
+        {
+            timeElapsed = Time.time - timeStarted;
+        }
+        
+        if (timeElapsed > stepTime)
         {
             timeline.Pause();
             timeStarted = 0;
@@ -38,6 +56,7 @@ public class DialogueManager : MonoBehaviour
     public void StartDialogue(Dialogue dialogue)
     {
         //timeline = tl;
+        dialogueStarted = true;
         ButtonsAnimator.SetBool("isOpen", false);
         DialogueAnimator.SetBool("isOpen", true);
         NameText.text = dialogue.name;
@@ -46,12 +65,19 @@ public class DialogueManager : MonoBehaviour
         {
             sentences.Enqueue(sentence);
         }
+       foreach(GameObject go in dialogue.objectArray)
+        {
+            print(go);
+            gameObjectsToShow.Enqueue(go);
+        }
         timeStarted = Time.time;
         DisplayNextSentence();
     }
 
     public void DisplayNextSentence()
     {
+        dialogueIndex++;
+        timeline.time += stepTime - timeElapsed;
         timeline.Play();
         timeStarted = Time.time;
         if (sentences.Count == 0)
@@ -60,8 +86,9 @@ public class DialogueManager : MonoBehaviour
             return;
         }
         
-
         string sentence = sentences.Dequeue();
+        GameObject obj = gameObjectsToShow.Dequeue();
+        obj.SetActive(true);
 
         StopAllCoroutines();
         StartCoroutine(TypeSentence(sentence));
@@ -80,6 +107,7 @@ public class DialogueManager : MonoBehaviour
 
     void EndDialogue()
     {
+        timeElapsed = 0;
         DialogueAnimator.SetBool("isOpen", false);
         foreach (var button in buttons)
         {
@@ -88,5 +116,6 @@ public class DialogueManager : MonoBehaviour
         DialogueBox.SetActive(false);
         
         ButtonsAnimator.SetBool("isOpen", true);
+        dialogueStarted = false;
     }
 }
