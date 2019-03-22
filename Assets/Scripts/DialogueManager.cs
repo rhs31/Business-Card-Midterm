@@ -14,19 +14,30 @@ public class DialogueManager : MonoBehaviour
     ButtonScript[] buttons;
     public GameObject DialogueBox;
     private PlayableDirector timeline;
-
+    private float timeStarted;
+    [SerializeField]private float timeElapsed;
     
     // Start is called before the first frame update
     void Start()
     {
+        timeline = gameObject.GetComponent<PlayableDirector>();
+        timeline.Pause();
         sentences = new Queue<string>();
         buttons = FindObjectsOfType<ButtonScript>();
     }
-
+    private void Update()
+    {
+        timeElapsed = Time.time - timeStarted;
+        if (timeElapsed > 3)
+        {
+            timeline.Pause();
+            timeStarted = 0;
+            timeElapsed = 0;
+        }
+    }
     public void StartDialogue(Dialogue dialogue)
     {
         //timeline = tl;
-        timeline = gameObject.GetComponent<PlayableDirector>();
         ButtonsAnimator.SetBool("isOpen", false);
         DialogueAnimator.SetBool("isOpen", true);
         NameText.text = dialogue.name;
@@ -35,13 +46,15 @@ public class DialogueManager : MonoBehaviour
         {
             sentences.Enqueue(sentence);
         }
-
+        timeStarted = Time.time;
         DisplayNextSentence();
     }
 
     public void DisplayNextSentence()
     {
-        if(sentences.Count == 0)
+        timeline.Play();
+        timeStarted = Time.time;
+        if (sentences.Count == 0)
         {
             EndDialogue();
             return;
