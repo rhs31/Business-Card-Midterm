@@ -93,10 +93,11 @@ public class DialogueManager : MonoBehaviour
         
         string sentence = sentences.Dequeue();
         GameObject obj = gameObjectsToShow.Dequeue();
+        GameObject objToLookAt = lookAtQueue.Dequeue();
         obj.SetActive(true);
-        if (obj.tag != "EmptyObject")
+        if (objToLookAt.tag != "EmptyObject")
         {
-            Head.GetComponent<HeadScript>().SlowlyLookAt(obj.transform);
+            Head.GetComponent<HeadScript>().SlowlyLookAt(objToLookAt.transform);
         }
         else
         {
@@ -136,5 +137,6 @@ public class DialogueManager : MonoBehaviour
         
         ButtonsAnimator.SetBool("isOpen", true);
         dialogueStarted = false;
+        Head.GetComponent<HeadScript>().SlowlyLookAt(GameObject.FindGameObjectWithTag("ForwardObject").transform);
     }
 }
