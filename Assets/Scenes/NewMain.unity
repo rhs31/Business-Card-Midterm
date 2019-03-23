@@ -364,6 +364,7 @@ GameObject:
   - component: {fileID: 92716581}
   - component: {fileID: 92716580}
   - component: {fileID: 92716583}
+  - component: {fileID: 92716584}
   m_Layer: 5
   m_Name: ResumeButton
   m_TagString: Untagged
@@ -404,7 +405,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -432,7 +433,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 92716583}
-        m_MethodName: StartSequence
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 92716584}
+        m_MethodName: OpenWebsite
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -497,6 +509,18 @@ MonoBehaviour:
   DummyObject: {fileID: 1030265934420705108, guid: c1de049d27090ee499fde9bf0fa0f5f0,
     type: 3}
   GameObjectToSetActive: {fileID: 0}
+--- !u!114 &92716584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 92716578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1b7012ab62ba3a4ba40caae16baccd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &134764466 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 67bd6cf99ce490248b8d3dc081987a6c,
@@ -1263,7 +1287,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 67bd6cf99ce490248b8d3dc081987a6c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.838
+      value: -1.094
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 67bd6cf99ce490248b8d3dc081987a6c, type: 3}
       propertyPath: m_LocalRotation.x
@@ -2068,6 +2092,7 @@ GameObject:
   - component: {fileID: 1206881727}
   - component: {fileID: 1206881726}
   - component: {fileID: 1206881729}
+  - component: {fileID: 1206881730}
   m_Layer: 5
   m_Name: PortfolioButton
   m_TagString: Untagged
@@ -2108,7 +2133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -2136,7 +2161,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1206881729}
-        m_MethodName: StartSequence
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1206881730}
+        m_MethodName: OpenWebsite
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2201,6 +2237,18 @@ MonoBehaviour:
   DummyObject: {fileID: 1030265934420705108, guid: c1de049d27090ee499fde9bf0fa0f5f0,
     type: 3}
   GameObjectToSetActive: {fileID: 0}
+--- !u!114 &1206881730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1206881724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d7cf23e8a143f544b496cf34a95b382, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!21 &1278957470
 Material:
   serializedVersion: 6
