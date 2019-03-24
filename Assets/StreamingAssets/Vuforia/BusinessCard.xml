@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
+  <Tracking>
+    <ImageTarget name="MoreMe" size="0.089000 0.092989" />
+    <ImageTarget name="SomewhatLargerMe" size="0.089000 0.118667" />
+    <ImageTarget name="LargerMe" size="0.089000 0.118667" />
+    <ImageTarget name="Me" size="0.089000 0.088824" />
+    <ImageTarget name="MeWithMagicLeap" size="0.008900 0.011867" />
+  </Tracking>
+</QCARConfig>
